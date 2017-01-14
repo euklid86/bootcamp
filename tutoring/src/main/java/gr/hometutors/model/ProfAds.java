@@ -1,13 +1,18 @@
 package gr.hometutors.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /*
@@ -21,12 +26,12 @@ import javax.persistence.Table;
 public class ProfAds {
 
 	/*
-	 * Class fields with reflection to the profads entity
+	 * Class fields that reflect the profads entity
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "pid")
-	private Long pid;
+	@Column(name = "pfid")
+	private Long pfid;
 
 	@Column(name = "information")
 	private String information;
@@ -34,27 +39,38 @@ public class ProfAds {
 	@Column(name = "reviewcode")
 	private String reviewCode;
 
-	@ManyToOne
-	private Professor professor;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pfid", nullable = false)
+	List<Reviews> reviews = new ArrayList<>();
+
+	private String secretCode;
 
 	/*
 	 * Accessors for the class private fields
 	 */
 
-	public Long getPid() {
-		return pid;
+	public Long getPfid() {
+		return pfid;
 	}
 
-	public Professor getProfessor() {
-		return professor;
+	public List<Reviews> getReviews() {
+		return reviews;
 	}
 
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
+	public void setReviews(List<Reviews> reviews) {
+		this.reviews = reviews;
 	}
 
-	public void setPid(Long pid) {
-		this.pid = pid;
+	public String getSecretCode() {
+		return secretCode;
+	}
+
+	public void setSecretCode(String secretCode) {
+		this.secretCode = secretCode;
+	}
+
+	public void setPfid(Long pfid) {
+		this.pfid = pfid;
 	}
 
 	public String getInformation() {
@@ -73,16 +89,26 @@ public class ProfAds {
 		this.reviewCode = reviewCode;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((information == null) ? 0 : information.hashCode());
-		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
+		result = prime * result + ((pfid == null) ? 0 : pfid.hashCode());
 		result = prime * result + ((reviewCode == null) ? 0 : reviewCode.hashCode());
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -97,10 +123,10 @@ public class ProfAds {
 				return false;
 		} else if (!information.equals(other.information))
 			return false;
-		if (pid == null) {
-			if (other.pid != null)
+		if (pfid == null) {
+			if (other.pfid != null)
 				return false;
-		} else if (!pid.equals(other.pid))
+		} else if (!pfid.equals(other.pfid))
 			return false;
 		if (reviewCode == null) {
 			if (other.reviewCode != null)
@@ -110,9 +136,15 @@ public class ProfAds {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "ProfAds [pid=" + pid + ", information=" + information + ", reviewCode=" + reviewCode + "]";
+		return "ProfAds [pfid=" + pfid + ", information=" + information + ", reviewCode=" + reviewCode + ", secretCode="
+				+ secretCode + "]";
 	}
 
 }

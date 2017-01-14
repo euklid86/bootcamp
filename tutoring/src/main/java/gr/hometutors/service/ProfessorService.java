@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import gr.hometutors.model.ProfAds;
 import gr.hometutors.model.Professor;
 import gr.hometutors.repository.ProfessorRepository;
 
+/*
+ * Class in order to execute the business logic of the application
+ * 
+ * @author Dimitris
+ */
 @Service
 public class ProfessorService {
 
@@ -23,23 +26,15 @@ public class ProfessorService {
 		return professorRepository.findAll();
 	}
 
-	public void createOne() {
-		ProfAds profAd1 = new ProfAds();
-		ProfAds profAd2 = new ProfAds();
-		profAd1.setInformation("efnwoefinwe");
-		profAd1.setReviewCode("wjofnowefn");
-		profAd2.setInformation("woiefnowiefn");
-		profAd2.setReviewCode("wejfnwoefnoweff");
-		Professor professor = new Professor();
-		professor.setEmail("wefwef");
-		professor.setFname("efef");
-		professor.setLname("wioefnwoienf");
-		professor.setLocation("efwef");
-		professor.setPhone("12314");
-		professor.getProfAds().add(profAd1);
-		professor.getProfAds().add(profAd2);
-		professor.setProfession("wefwf");
-		professor.setSecretCode("efw");
+	public void createOne(Professor professorNew) {
+		professorRepository.save(professorNew);
+	}
+
+	public Professor findBySecretCode(String secretCode) {
+		return professorRepository.findBySecretCode(secretCode);
+	}
+
+	public void update(Professor professor) {
 		professorRepository.save(professor);
 	}
 }

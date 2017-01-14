@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class Reviews {
 
 	/*
-	 * Class fields with reflection to the reviews entity
+	 * Class fields that reflect the reviews entity
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,10 +38,20 @@ public class Reviews {
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
 
+	private String reviewCode;
 
 	/*
 	 * Accessors for the class private fields
 	 */
+
+	public String getReviewCode() {
+		return reviewCode;
+	}
+
+	public void setReviewCode(String reviewCode) {
+		this.reviewCode = reviewCode;
+	}
+
 	public Long getRid() {
 		return rid;
 	}
@@ -74,6 +84,11 @@ public class Reviews {
 		this.timestamp = timestamp;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -85,6 +100,11 @@ public class Reviews {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -114,6 +134,11 @@ public class Reviews {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Reviews [rid=" + rid + ", stars=" + stars + ", evaluation=" + evaluation + ", timestamp=" + timestamp

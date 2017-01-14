@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import gr.hometutors.model.Professor;
 import gr.hometutors.service.ProfessorService;
 
+/*
+ * The controller of the professor entity
+ * 
+ * @author Dimitris
+ */
 @RestController
 @RequestMapping(path = "/professor")
 public class ProfessorResource {
@@ -27,14 +33,8 @@ public class ProfessorResource {
 		return ResponseEntity.ok(profList);
 	}
 
-	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Professor> getById(@PathVariable(name = "id") Long id) {
-		Professor professor = professorService.findById(id);
-		return ResponseEntity.ok(professor);
-	}
-
-	@RequestMapping(path = "/createOne")
-	public void createOne() {
-		professorService.createOne();
+	@RequestMapping(path = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public void register(@RequestBody Professor professor) {
+		professorService.createOne(professor);
 	}
 }

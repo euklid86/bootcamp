@@ -26,7 +26,7 @@ import javax.persistence.Table;
 public class Professor {
 
 	/*
-	 * Class fields with reflection to the entity profession
+	 * Class fields that reflec the entity profession
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -134,6 +134,11 @@ public class Professor {
 		this.phone = phone;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Professor [prid=" + prid + ", secretCode=" + secretCode + ", fname=" + fname + ", lname=" + lname
@@ -141,6 +146,11 @@ public class Professor {
 				+ "]";
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -156,6 +166,11 @@ public class Professor {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
